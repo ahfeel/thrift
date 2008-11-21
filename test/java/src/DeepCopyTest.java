@@ -106,7 +106,7 @@ public class DeepCopyTest {
 
     hmCopy2.bonks.get("nothing").get(1).message = "What else?";
 
-    if (hmCopy.equals(hmCopy2))
+    if (hm.equals(hmCopy2))
       throw new RuntimeException("equals method not working!");
 
     //System.out.println("DeepCopyTest passed!");
