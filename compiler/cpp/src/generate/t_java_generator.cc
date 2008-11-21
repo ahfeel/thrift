@@ -675,7 +675,7 @@ void t_java_generator::generate_java_struct_definition(ofstream &out,
 
     if (type->is_container()) {
       generate_deep_copy_container(out, "other", field_name, "__this__" + field_name, type);
-      indent(out) << field_name << " = __this__" << field_name << ";" << endl;
+      indent(out) << "this." << field_name << " = __this__" << field_name << ";" << endl;
     } else {
       indent(out) << "this." << field_name << " = ";
       generate_deep_copy_non_container(out, "other." + field_name, type);
