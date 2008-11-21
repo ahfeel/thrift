@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class DeepCopyTest {
-  
+
   private static final byte[] kUnicodeBytes = {
     (byte)0xd3, (byte)0x80, (byte)0xe2, (byte)0x85, (byte)0xae, (byte)0xce,
     (byte)0x9d, (byte)0x20, (byte)0xd0, (byte)0x9d, (byte)0xce, (byte)0xbf,
@@ -22,11 +22,11 @@ public class DeepCopyTest {
     (byte)0x85, (byte)0xbd, (byte)0xce, (byte)0xba, (byte)0x83, (byte)0xe2,
     (byte)0x80, (byte)0xbc
   };
-  
+
   public static void main(String[] args) throws Exception {
     TSerializer   binarySerializer   = new   TSerializer(new TBinaryProtocol.Factory());
     TDeserializer binaryDeserializer = new TDeserializer(new TBinaryProtocol.Factory());
-    
+
     OneOfEach ooe = new OneOfEach();
     ooe.im_true = true;
     ooe.im_false = false;
@@ -92,23 +92,23 @@ public class DeepCopyTest {
     b.type = 5;
     b.message = "nevermore";
     hm.bonks.put("poe", stage2);
-      
-    
+
+
     byte[] binaryCopy = binarySerializer.serialize(hm);
     HolyMoley hmCopy = new HolyMoley();
-    binaryDeserializer.deserialize(hmCopy, binaryCopy);    
+    binaryDeserializer.deserialize(hmCopy, binaryCopy);
     HolyMoley hmCopy2 = new HolyMoley(hm);
-    
+
     if (!hm.equals(hmCopy))
       throw new RuntimeException("copy constructor modified the original object!");
     if (!hmCopy.equals(hmCopy2))
       throw new RuntimeException("copy constructor generated incorrect copy");
-    
+
     hmCopy2.bonks.get("nothing").get(1).message = "What else?";
-    
+
     if (hmCopy.equals(hmCopy2))
       throw new RuntimeException("equals method not working!");
-    
+
     //System.out.println("DeepCopyTest passed!");
   }
 }
